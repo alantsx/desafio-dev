@@ -1,5 +1,5 @@
 {
-  "name": "TXTparser",
+  "name": "Txtparser",
   "version": "1.0",
   "description": "Upload and parse TXT file",
   "main": "index.js",
