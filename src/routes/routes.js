@@ -1,7 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const multer = require("multer");
-const { parseTransactions } = require("../parser");
+const multer = require('multer');
+const { parseTransactions } = require('../controllers/parser');
+const transactionsService = require('./service/transactionsService');
+
+const database = require('../database/infra/database');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -17,6 +20,11 @@ const upload = multer({ storage });
 router.get("/", (req, res) => {
     res.render("index");
     parseTransactions();
+});
+
+router.get("/transactions", async (req, res) => {
+    const transactions = await transactionsService.getTransactions();
+    res.json(transactions);
 });
 
 router.post("/upload", upload.single("arquivo"), (req, res) => {
