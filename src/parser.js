@@ -19,6 +19,6 @@ module.exports = {
             donoLojaTransaction.push(transactions[index].slice(48, 62));
             nomeLojaTransaction.push(transactions[index].slice(62));
         }
-        console.log(nomeLojaTransaction);
+        console.log(horaTransaction);
     }
 }
