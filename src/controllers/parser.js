@@ -1,7 +1,7 @@
 const fs = require("fs");
 
 exports.parseTransactions = () => {
-    const transactions = fs.readFileSync("uploads/CNAB.txt").toString().split("\n");
+    const transactions = fs.readFileSync("src/uploads/CNAB.txt").toString().split("\n");
     transactions.pop();
 
     const tipoTransaction = [], dataTransaction = [], valorTransaction = [],

@@ -11,5 +11,5 @@
 - Setup connection credencials on routes/infra/database.js
 - Data, infra, service, test
 
-#### Sequelize
-- Ro
+#### PG
+- Rodar Migrations?

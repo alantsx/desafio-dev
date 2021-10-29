@@ -2,9 +2,6 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const { parseTransactions } = require('../controllers/parser');
-const transactionsService = require('./service/transactionsService');
-
-const database = require('../database/infra/database');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
