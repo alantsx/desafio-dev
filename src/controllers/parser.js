@@ -1,7 +1,7 @@
 const fs = require("fs");
 
 exports.parseTransactions = () => {
-    const transactions = fs.readFileSync("src/uploads/CNAB.txt").toString().split("\n");
+    const transactions = fs.readFileSync("src/uploads/CNAB.txt").toString().split("\r\n");
     transactions.pop();
 
     const tipoTransaction = [], dataTransaction = [], valorTransaction = [],
@@ -9,7 +9,7 @@ exports.parseTransactions = () => {
         donoLojaTransaction = [], nomeLojaTransaction = [];
 
     for (var index = 0; index < transactions.length; index++) {
-        tipoTransaction.push(transactions[index][0]);
+        tipoTransaction.push(parseInt(transactions[index][0]));
         dataTransaction.push(transactions[index].slice(1, 9));
         valorTransaction.push((parseInt(transactions[index].slice(9, 19))) / 100);
         cpfTransaction.push(transactions[index].slice(19, 30));
@@ -18,5 +18,16 @@ exports.parseTransactions = () => {
         donoLojaTransaction.push(transactions[index].slice(48, 62));
         nomeLojaTransaction.push(transactions[index].slice(62));
     }
-    console.log(horaTransaction);
+
+    const transactionsParsed = {
+        tipo: tipoTransaction,
+        data: dataTransaction,
+        valor: valorTransaction,
+        cpf: cpfTransaction,
+        cartao: cartaoTransaction,
+        hora: horaTransaction,
+        donoLoja: donoLojaTransaction,
+        nomeLoja: nomeLojaTransaction
+    }
+    return transactionsParsed;
 }
