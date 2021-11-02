@@ -1,4 +1,3 @@
-const { query } = require('express');
 const client = require('../database/connectDb');
 const { insertTransactions } = require('../database/Transactions');
 const { parseTransactions } = require('./parser');
@@ -18,6 +17,5 @@ exports.registerTransaction = () => {
       nomeLoja: transactionsParsed.nomeLoja[index]
     }
     insertTransactions(queryTransaction);
-    client.end();
   }
 }
