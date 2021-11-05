@@ -2,7 +2,7 @@ const client = require('../database/connectDb');
 const { insertTransactions } = require('../database/insertTransaction');
 const { parseTransactions } = require('./parser');
 
-exports.registerTransaction = async () => {
+exports.registerTransaction = () => {
   const transactionsParsed = parseTransactions();
   for (var index = 0; index < transactionsParsed.tipo.length; index++) {
     transaction = {
@@ -15,8 +15,8 @@ exports.registerTransaction = async () => {
       donoLoja: transactionsParsed.donoLoja[index],
       nomeLoja: transactionsParsed.nomeLoja[index]
     }
-    await client.query(insertTransactions(transaction), (err, res) => {
-      if(err) {
+    client.query(insertTransactions(transaction), (err, res) => {
+      if (err) {
         console.log(err.stack);
       }
     });

@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const { registerTransaction } = require('../controllers/registerTransaction');
+const { selectTable } = require('../controllers/table');
 const client = require('../database/connectDb');
-const selectTransactionsQuery = require('../database/selectInputTransactions');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -16,8 +16,9 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
     res.render("index");
+    selectTable();
 });
 
 router.get("/transactions", async (req, res) => {
@@ -25,9 +26,9 @@ router.get("/transactions", async (req, res) => {
     res.json(rows);
 });
 
-router.post("/upload", upload.single("arquivo"), async (req, res) => {
+router.post("/upload", upload.single("arquivo"), (req, res) => {
     res.send("Arquivo recebido!");
-    await registerTransaction();
+    registerTransaction();
 });
 
 module.exports = router;
